@@ -11,6 +11,12 @@ A basic movie application with React and TMDB API
 
 1. React Router
 
-- [x] install react-router-dom & @type/react-router-dom  
+- [x] install react-router-dom, @type/react-router-dom  
        `$yarn add react-router-dom @type/react-router-dom`
 - [x] set up routing - Router, Switch, Link - Header components
+
+2. Styled Components
+
+- [x] install styled-components, @types/styled-components, styled-reset
+      `$yarn add styled-components @types/styled-components styled-reset`
+- [x] create global styles + reset styles
