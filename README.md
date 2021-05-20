@@ -20,3 +20,10 @@ A basic movie application with React and TMDB API
 - [x] install styled-components, @types/styled-components, styled-reset
       `$yarn add styled-components @types/styled-components styled-reset`
 - [x] create global styles + reset styles
+
+1. TMDB API
+
+- [x] get api key
+- [x] create tmdb api class
+  - Movie(nowPlaying, popular, upcoming, detail, search)
+  - Tv(airingToday, popular, topRated, detail, search)
