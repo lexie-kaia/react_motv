@@ -47,14 +47,14 @@ class TmdbMovie extends Tmdb implements MovieApi {
         append_to_response: 'videos',
       },
     });
-    return response.data.results;
+    return response.data;
   }
 
   async search(term: string) {
     const response = await this.tmdb.get('search/movie', {
       params: {
-        query: encodeURIComponent(term)
-      }
+        query: encodeURIComponent(term),
+      },
     });
     return response.data.results;
   }
@@ -72,7 +72,7 @@ class TmdbTv extends Tmdb implements TvApi {
   }
 
   async getTopRated() {
-    const response = await this.tmdb.get('movie/top_rated');
+    const response = await this.tmdb.get('tv/top_rated');
     return response.data.results;
   }
 
@@ -82,17 +82,18 @@ class TmdbTv extends Tmdb implements TvApi {
         append_to_response: 'videos',
       },
     });
-    return response.data.results;
+    return response.data;
   }
 
   async search(term: string) {
     const response = await this.tmdb.get('search/tv', {
       params: {
-        query: encodeURIComponent(term)
-      }
+        query: encodeURIComponent(term),
+      },
     });
     return response.data.results;
+  }
 }
 
-export const movie = new TmdbMovie();
-export const tv = new TmdbTv();
+export const movieApi = new TmdbMovie();
+export const tvApi = new TmdbTv();
