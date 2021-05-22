@@ -21,9 +21,24 @@ A basic movie application with React and TMDB API
       `$yarn add styled-components @types/styled-components styled-reset`
 - [x] create global styles + reset styles
 
-1. TMDB API
+3. TMDB API
 
 - [x] get api key
 - [x] create tmdb api class
   - Movie(nowPlaying, popular, upcoming, detail, search)
   - Tv(airingToday, popular, topRated, detail, search)
+
+4. Container-Presenter Pattern
+
+- [x] create container-presenter pattern
+  - [Dan Abramov - Presentational and Conatiner Components](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0)
+  - index.js
+    : access point -> managing module dependencies
+  - container.tsx
+    : how things work -> providing the data and behavior to presenter
+  - presenter.tsx
+    : how things look
+- [x] Home(movie)
+- [x] TV
+- [x] Search
+- [x] Detail
