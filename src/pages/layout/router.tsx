@@ -10,7 +10,7 @@ const Router = () => (
     <Route exact path="/">
       <Home />
     </Route>
-    <Route path="/tv">
+    <Route exact path="/tv">
       <Tv />
     </Route>
     <Route path="/search/:term">

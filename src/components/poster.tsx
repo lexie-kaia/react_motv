@@ -20,7 +20,6 @@ const Container = styled.div`
 
 const Image = styled.img`
   width: 100%;
-  border-radius: 0.4rem;
 `;
 
 const Info = styled.div``;

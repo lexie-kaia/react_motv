@@ -26,6 +26,7 @@ input {
   border: 0;
   font-family: inherit;
   font-size: inherit;
+  background: transparent;
 
   &:focus {
     outline:0;
