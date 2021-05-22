@@ -5,6 +5,9 @@ import HomePresenter from './home_presenter';
 export type Movie = {
   id: number;
   original_title: string;
+  poster_path: string;
+  release_date: string;
+  vote_average: number;
 };
 
 export type Movies = {

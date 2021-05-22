@@ -5,6 +5,9 @@ import TvPresenter from './tv_presenter';
 export type Tv = {
   id: number;
   original_name: string;
+  poster_path: string;
+  first_air_date: string;
+  vote_average: number;
 };
 
 export type Tvs = {

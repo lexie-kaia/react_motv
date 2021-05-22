@@ -4,6 +4,7 @@ import Main from 'components/main';
 import Section from 'components/section';
 import Loader from 'components/loader';
 import ErrorMessage from 'components/error_message';
+import Poster from 'components/poster';
 
 type Props = {
   movieResults: Movie[];
@@ -22,7 +23,8 @@ const SearchPresenter = ({
 }: Props) => (
   <>
     {errorMessage && <ErrorMessage errorMessage={errorMessage} />}
-    {movieResults &&
+    {!isLoading &&
+      movieResults &&
       tvResults &&
       movieResults.length === 0 &&
       tvResults.length === 0 && (
@@ -33,16 +35,32 @@ const SearchPresenter = ({
     ) : (
       <Main>
         {movieResults && movieResults.length > 0 && (
-          <Section title="Now Playing">
+          <Section title="Movie Results">
             {movieResults.map((movie) => (
-              <li key={movie.id}>{movie.original_title}</li>
+              <Poster
+                key={movie.id}
+                id={movie.id}
+                title={movie.original_title}
+                imageUrl={movie.poster_path}
+                year={movie.release_date.slice(0, 4)}
+                rating={movie.vote_average}
+                isMovie={true}
+              />
             ))}
           </Section>
         )}
         {tvResults && tvResults.length > 0 && (
-          <Section title="Popular">
+          <Section title="Tv Results">
             {tvResults.map((tv) => (
-              <li key={tv.id}>{tv.original_name}</li>
+              <Poster
+                key={tv.id}
+                id={tv.id}
+                title={tv.original_name}
+                imageUrl={tv.poster_path}
+                year={tv.first_air_date.slice(0, 4)}
+                rating={tv.vote_average}
+                isMovie={true}
+              />
             ))}
           </Section>
         )}

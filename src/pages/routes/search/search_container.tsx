@@ -6,11 +6,17 @@ import SearchPresenter from './search_presenter';
 export type Movie = {
   id: number;
   original_title: string;
+  poster_path: string;
+  release_date: string;
+  vote_average: number;
 };
 
 export type Tv = {
   id: number;
   original_name: string;
+  poster_path: string;
+  first_air_date: string;
+  vote_average: number;
 };
 
 export type Results = {

@@ -7,7 +7,7 @@ type Props = {
 };
 
 const Container = styled.section`
-  padding: 1rem 0;
+  padding: 2rem 0 1rem;
 `;
 
 const Title = styled.h2`
@@ -16,7 +16,11 @@ const Title = styled.h2`
   font-weight: 700;
 `;
 
-const Grid = styled.ul``;
+const Grid = styled.ul`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(10rem, auto));
+  gap: 1rem;
+`;
 
 const Section = ({ title, children }: Props) => (
   <Container>
