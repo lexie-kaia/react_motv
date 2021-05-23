@@ -48,6 +48,7 @@ const DetailContainer = () => {
         setError("Can't find anything");
       } finally {
         setLoading(false);
+        console.log(details);
       }
     })();
   }, [paramId, history, pathname]);

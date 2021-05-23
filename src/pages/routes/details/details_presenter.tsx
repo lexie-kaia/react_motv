@@ -152,7 +152,11 @@ const DetailsPresenter = ({
               <Overview>{overview}</Overview>
             </Info>
             <Backdrop
-              backdropUrl={`https://image.tmdb.org/t/p/original${backdrop_path}`}
+              backdropUrl={
+                backdrop_path
+                  ? `https://image.tmdb.org/t/p/original${backdrop_path}`
+                  : ''
+              }
             />
           </Banner>
 

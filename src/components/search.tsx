@@ -8,43 +8,53 @@ type Props = {
 
 const Form = styled.form`
   position: relative;
-  padding: 0 1rem;
+  width: 100%;
+  height: 2rem;
+
+  @media screen and (min-width: 769px) {
+    width: ${({ isFocused }: { isFocused: boolean }) =>
+      isFocused ? `24rem` : '16rem'};
+    transition: width 200ms ease-out;
+  }
 `;
 
 const Input = styled.input`
-  width: 14rem;
-  border-bottom: 1px solid #757575;
-  transition: border-bottom 200ms;
+  height: 100%;
+  width: 100%;
+  padding: 0 1rem 0 2rem;
+  border: 1px solid white;
+  border-radius: 1rem;
+  color: white;
+  opacity: 0.75;
+  transition: opacity 200ms;
 
   &::placeholder {
-    color: #757575;
-    transition: color 200ms;
+    color: white;
   }
 
   & + svg {
     position: absolute;
-    top: 1px;
-    right: 1rem;
-    color: #757575;
-    transition: color 200ms;
-  }
-
-  &:focus {
-    border-bottom: 1px solid #212121;
-  }
-
-  &:focus::placeholder {
-    color: #212121;
+    top: 5px;
+    left: 9px;
+    font-size: 1.2rem;
+    color: white;
+    opacity: 0.75;
+    transition: opacity 200ms;
   }
 
   &:focus + svg {
-    color: #212121;
+    opacity: 1;
+  }
+
+  &:focus {
+    opacity: 1;
   }
 `;
 
 const useInput = () => {
   const ref = useRef<HTMLInputElement>(null);
   const [value, setValue] = useState('');
+
   const onChange = () => {
     if (!ref.current) return;
     setValue(ref.current.value);
@@ -53,6 +63,7 @@ const useInput = () => {
 };
 
 const Search = ({ searchByTerm }: Props) => {
+  const [isFocused, setIsFocused] = useState<boolean>(false);
   const { ref, value, onChange } = useInput();
 
   const onSubmit = (event: FormEvent<HTMLFormElement>) => {
@@ -60,14 +71,24 @@ const Search = ({ searchByTerm }: Props) => {
     searchByTerm(value);
   };
 
+  const onFocus = () => {
+    setIsFocused(true);
+  };
+
+  const onBlur = () => {
+    setIsFocused(false);
+  };
+
   return (
-    <Form onSubmit={onSubmit}>
+    <Form onSubmit={onSubmit} isFocused={isFocused}>
       <Input
         type="text"
         ref={ref}
         value={value}
+        placeholder="Search"
         onChange={onChange}
-        placeholder="Search Movies or TV Shows"
+        onFocus={onFocus}
+        onBlur={onBlur}
       />
       <IoIosSearch />
     </Form>

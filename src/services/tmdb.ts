@@ -44,7 +44,7 @@ class TmdbMovie extends Tmdb implements MovieApi {
   async getDetails(id: number) {
     const response = await this.tmdb.get(`movie/${id}`, {
       params: {
-        append_to_response: 'videos',
+        append_to_response: 'videos,images',
       },
     });
     return response.data;
@@ -79,7 +79,7 @@ class TmdbTv extends Tmdb implements TvApi {
   async getDetails(id: number) {
     const response = await this.tmdb.get(`tv/${id}`, {
       params: {
-        append_to_response: 'videos',
+        append_to_response: 'videos,images',
       },
     });
     return response.data;
