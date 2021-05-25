@@ -14,7 +14,6 @@ type Props = {
 const Item = styled.li``;
 
 const Content = styled.div`
-  max-width: 14rem;
   position: relative;
   overflow: hidden;
   margin: 0 auto;
@@ -30,10 +29,17 @@ const Img = styled.div`
   align-items: flex-start;
   padding: 1.5rem 1rem;
   width: 100%;
-  height: 24rem;
+  height: 22rem;
   background: ${({ url }: { url: string }) =>
     `linear-gradient(rgba(0,0,0,0) 0%, rgba(44,46,69,0.3) 50%, rgba(23,25,37,1) 80%)
-  , no-repeat 50% 0 / contain url(${url})`};
+  , no-repeat 50% 0 / cover url(${url})`};
+  @media screen and (min-width: 769px) {
+    height: 24rem;
+  }
+
+  @media screen and (min-width: 1200px) {
+    height: 26rem;
+  }
 `;
 
 const Score = styled.div`
@@ -69,7 +75,7 @@ const Poster = ({ id, title, imageUrl, year, score, isMovie }: Props) => (
         <Img
           url={
             imageUrl
-              ? `https://image.tmdb.org/t/p/w500${imageUrl}`
+              ? `https://image.tmdb.org/t/p/w300${imageUrl}`
               : '/images/poster_default.jpg'
           }
         >

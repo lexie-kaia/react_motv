@@ -6,10 +6,9 @@ const Nav = styled.nav``;
 
 const NavList = styled.ul`
   display: flex;
-  justify-content: space-between;
-  max-width: 28rem;
+  justify-content: center;
   margin: 0 auto;
-  padding: 1.5rem 2rem 0rem;
+  padding: 1.5rem 0;
 `;
 
 const NavItem = styled.li``;
@@ -17,6 +16,7 @@ const NavItem = styled.li``;
 const StyledLink = styled(Link)`
   position: relative;
   display: block;
+  margin: 0 1rem;
   height: 2rem;
   font-weight: 500;
   line-height: 2rem;
@@ -33,7 +33,12 @@ const StyledLink = styled(Link)`
     background: white;
     transition: width 200ms ease-out;
   }
+
+  @media screen and (min-width: 769px) {
+    margin: 0 1.5rem;
+  }
 `;
+
 type Props = {
   navList: { name: string; pathname: string }[];
   pathname: string;

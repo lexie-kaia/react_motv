@@ -103,7 +103,6 @@ const Hr = styled.div`
 `;
 
 const Overview = styled.p`
-  font-size: 0.875rem;
   /* overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
@@ -112,9 +111,6 @@ const Overview = styled.p`
   max-height: 4.8em; */
   line-height: 1.6em;
   letter-spacing: 0.025em;
-  @media screen and (min-width: 769px) {
-    font-size: 1rem;
-  }
 `;
 
 const Production = styled.div`
@@ -184,20 +180,24 @@ const DetailsInfo = ({ details }: Props) => (
       <Title>{details.title}</Title>
 
       <Meta>
-        <Data>{details.year}</Data>
-        <Data>{details.runtime}min</Data>
-        <Data>
-          {details.countries.map((item) => (
-            <Span key={item.iso_3166_1}>{item.iso_3166_1}</Span>
-          ))}
-        </Data>
+        {details.year && <Data>{details.year}</Data>}
+        {details.runtime && <Data>{details.runtime}min</Data>}
+        {details.countries && (
+          <Data>
+            {details.countries.map((item) => (
+              <Span key={item.iso_3166_1}>{item.iso_3166_1}</Span>
+            ))}
+          </Data>
+        )}
       </Meta>
       <Meta>
-        <Data>
-          {details.genres.map((item) => (
-            <Span key={item.id}>{item.name}</Span>
-          ))}
-        </Data>
+        {details.genres && (
+          <Data>
+            {details.genres.map((item) => (
+              <Span key={item.id}>{item.name}</Span>
+            ))}
+          </Data>
+        )}
       </Meta>
 
       <Score>
@@ -206,11 +206,13 @@ const DetailsInfo = ({ details }: Props) => (
       </Score>
 
       <Meta>
-        <Production>
-          {details.companies.map((item) => (
-            <Company key={item.id}>{item.name}</Company>
-          ))}
-        </Production>
+        {details.companies && (
+          <Production>
+            {details.companies.map((item) => (
+              <Company key={item.id}>{item.name}</Company>
+            ))}
+          </Production>
+        )}
       </Meta>
 
       <Hr />

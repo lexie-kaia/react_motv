@@ -9,7 +9,7 @@ type Props = {
 const Form = styled.form`
   position: relative;
   width: 100%;
-  height: 2rem;
+  height: 2.4rem;
 
   @media screen and (min-width: 769px) {
     width: ${({ isFocused }: { isFocused: boolean }) =>
@@ -23,8 +23,9 @@ const Input = styled.input`
   width: 100%;
   padding: 0 1rem 0 2rem;
   border: 1px solid white;
-  border-radius: 1rem;
+  border-radius: 1.2rem;
   color: white;
+  line-height: 2.4rem;
   opacity: 0.75;
   transition: opacity 200ms;
 
@@ -34,7 +35,7 @@ const Input = styled.input`
 
   & + svg {
     position: absolute;
-    top: 5px;
+    top: 8px;
     left: 9px;
     font-size: 1.2rem;
     color: white;

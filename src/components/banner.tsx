@@ -81,7 +81,6 @@ const Hr = styled.div`
 `;
 
 const Overview = styled.p`
-  font-size: 0.875rem;
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
@@ -90,9 +89,6 @@ const Overview = styled.p`
   max-height: 4.8em;
   line-height: 1.6em;
   letter-spacing: 0.025em;
-  @media screen and (min-width: 769px) {
-    font-size: 1rem;
-  }
 `;
 
 const Buttons = styled.div`

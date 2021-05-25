@@ -18,6 +18,8 @@ type Props = {
   pathname: string;
 };
 
+const Frame = styled.li``;
+
 const Image = styled.img`
   width: 100%;
 `;
@@ -64,12 +66,12 @@ const DetailsPresenter = ({
           >
             <Section isPoster={false}>
               {details.images?.map((image, index) => (
-                <li key={index}>
+                <Frame key={index}>
                   <Image
-                    src={`https://image.tmdb.org/t/p/w300${image.file_path}`}
+                    src={`https://image.tmdb.org/t/p/w500${image.file_path}`}
                     alt=""
                   />
-                </li>
+                </Frame>
               ))}
             </Section>
           </Route>
@@ -82,7 +84,7 @@ const DetailsPresenter = ({
           >
             <Section isPoster={false}>
               {details.videos?.map((video, index) => (
-                <li key={index}>
+                <Frame key={index}>
                   <IframeContainer>
                     <iframe
                       width="1904"
@@ -94,7 +96,7 @@ const DetailsPresenter = ({
                       allowFullScreen
                     ></iframe>
                   </IframeContainer>
-                </li>
+                </Frame>
               ))}
             </Section>
           </Route>

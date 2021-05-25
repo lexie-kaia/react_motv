@@ -27,8 +27,20 @@ const Title = styled.h2`
 const List = styled.ul`
   display: grid;
   grid-template-columns: ${({ isPoster }: { isPoster: boolean }) =>
-    isPoster ? 'repeat(auto-fit, minmax(13rem, auto))' : 'repeat(4, 1fr)'};
-  gap: 2rem;
+    isPoster ? 'repeat(2, 1fr)' : ''};
+  gap: 1.5rem;
+
+  @media screen and (min-width: 769px) {
+    grid-template-columns: ${({ isPoster }: { isPoster: boolean }) =>
+      isPoster ? 'repeat(4, 1fr)' : 'repeat(3, 1fr)'};
+    gap: 1.5rem;
+  }
+
+  @media screen and (min-width: 1200px) {
+    grid-template-columns: ${({ isPoster }: { isPoster: boolean }) =>
+      isPoster ? 'repeat(6, 1fr)' : 'repeat(3, 1fr)'};
+    gap: 2rem;
+  }
 `;
 
 const Section = ({ title, children, isPoster }: Props) => (
