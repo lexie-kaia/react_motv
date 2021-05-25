@@ -14,7 +14,8 @@ body {
   font-family: 'Roboto', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color: #212121;
+  color: white;
+  background: #030303;
 }
 
 a {
@@ -30,6 +31,22 @@ input {
 
   &:focus {
     outline:0;
+  }
+}
+
+ul {
+  list-style:none;
+}
+
+button {
+  border:0;
+  color: inherit;
+  background: transparent;
+  font-family: inherit;
+  font-size: inherit;
+  cursor:pointer;
+  &:focus {
+    outline: none;
   }
 }
 `;

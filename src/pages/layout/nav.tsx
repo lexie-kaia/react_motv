@@ -4,17 +4,18 @@ import { Link, useHistory, useLocation } from 'react-router-dom';
 import Search from 'components/search';
 
 const Header = styled.header`
-  padding: 1rem 2rem;
+  padding: 1rem 2rem 1.5rem;
+  z-index: 1;
 
   @media screen and (min-width: 769px) {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 2rem;
+    padding: 1.5rem;
   }
 
   @media screen and (min-width: 1200px) {
-    padding: 2rem 6rem;
+    padding: 1.5rem 6rem;
   }
 `;
 
@@ -45,15 +46,17 @@ const Navlist = styled.ul`
 `;
 
 const NavItem = styled.li`
-  position: relative;
-
-  height: 2rem;
-  font-weight: 500;
-  line-height: 2rem;
-
   &:not(:last-child) {
     margin-right: 2.4rem;
   }
+`;
+
+const StyledLink = styled(Link)`
+  position: relative;
+  display: block;
+  height: 2rem;
+  font-weight: 500;
+  line-height: 2rem;
 
   &::after {
     content: '';
@@ -62,8 +65,8 @@ const NavItem = styled.li`
     left: 0;
     width: ${({ selected }: { selected: boolean }) =>
       selected ? '100%' : '0'};
-    height: 2px;
-    background: #212121;
+    height: 3px;
+    background: white;
     transition: width 200ms ease-out;
   }
 `;
@@ -80,15 +83,27 @@ const Nav = () => {
     <Header>
       <NavContainer>
         <Logo>
-          <Link to="/movie">MOTV</Link>
+          <Link to="/movies/popular">MOTV</Link>
         </Logo>
         <Navbar>
           <Navlist>
-            <NavItem selected={pathname === '/movie'}>
-              <Link to="/movie">MOVIE</Link>
+            <NavItem>
+              <StyledLink
+                to="/movies/popular"
+                selected={
+                  pathname.includes('/movies') || pathname.includes('/movie')
+                }
+              >
+                MOVIE
+              </StyledLink>
             </NavItem>
-            <NavItem selected={pathname === '/tv'}>
-              <Link to="/tv">TV SHOWS</Link>
+            <NavItem>
+              <StyledLink
+                to="/tvs/airing_today"
+                selected={pathname.includes('/tvs') || pathname.includes('/tv')}
+              >
+                TV SHOWS
+              </StyledLink>
             </NavItem>
           </Navlist>
         </Navbar>

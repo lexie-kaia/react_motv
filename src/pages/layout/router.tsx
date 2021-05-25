@@ -8,12 +8,12 @@ import Tv from 'pages/routes/tv';
 const Router = () => (
   <Switch>
     <Route exact path="/">
-      <Redirect to="/movie" />
+      <Redirect to="/movies/now_playing" />
     </Route>
-    <Route exact path="/movie">
+    <Route path="/movies">
       <Home />
     </Route>
-    <Route exact path="/tv">
+    <Route path="/tvs">
       <Tv />
     </Route>
     <Route path="/search/:term">
