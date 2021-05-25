@@ -1,9 +1,10 @@
 import React, { ReactNode } from 'react';
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 
 type Props = {
   title?: string;
   children: ReactNode;
+  isPoster: boolean;
 };
 
 const Container = styled.section`
@@ -25,14 +26,15 @@ const Title = styled.h2`
 
 const List = styled.ul`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(13rem, auto));
+  grid-template-columns: ${({ isPoster }: { isPoster: boolean }) =>
+    isPoster ? 'repeat(auto-fit, minmax(13rem, auto))' : 'repeat(4, 1fr)'};
   gap: 2rem;
 `;
 
-const Section = ({ title, children }: Props) => (
+const Section = ({ title, children, isPoster }: Props) => (
   <Container>
     {title && <Title>{title}</Title>}
-    <List>{children}</List>
+    <List isPoster={isPoster}>{children}</List>
   </Container>
 );
 

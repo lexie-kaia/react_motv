@@ -1,101 +1,25 @@
 import React from 'react';
-import { Details } from './details_container';
-import styled from 'styled-components';
-import Main from 'components/main';
+import { Switch, Route } from 'react-router-dom';
+import { Details, NavList } from './details_container';
+import styled from '@emotion/styled';
 import Loader from 'components/loader';
-import ErrorMessage from 'components/error_message';
-import { spawn } from 'child_process';
+import ErrorMessage from 'components/error';
+import DetailsInfo from 'components/detailsInfo';
+import SectionNav from 'components/section_nav';
+import Section from 'components/section';
+import PosterSeasons from 'components/poster_seasons';
 
 type Props = {
-  title: string | undefined;
-  year: string | undefined;
-  runtime: number | undefined;
-  genres: { id: number; name: string }[] | undefined;
-  overview: string | undefined;
-  poster_path: string | undefined;
-  backdrop_path: string | undefined;
-  videos: { id: string; key: string; name: string }[] | undefined;
+  details: Details;
   loading: boolean;
   error: string | null;
   isMovie: boolean;
+  navList: NavList;
+  pathname: string;
 };
 
-const Banner = styled.div`
-  position: relative;
-  height: 450px;
-  margin: 1rem auto;
-`;
-
-const Info = styled.div`
-  padding: 3rem;
-  color: white;
-`;
-
-const Title = styled.h2`
-  margin-bottom: 1rem;
-  font-size: 2rem;
-  font-weight: 700;
-`;
-
-const Meta = styled.div`
-  margin-bottom: 1.5rem;
-`;
-
-const Data = styled.span`
-  font-size: 1.125rem;
-  color: #bdbdbd;
-  &:not(:last-child) {
-    margin-right: 1rem;
-
-    &::after {
-      content: '•';
-      margin-left: 1rem;
-    }
-  }
-`;
-
-const Genre = styled.span`
-  &:not(:last-child)::after {
-    content: ' / ';
-  }
-`;
-
-const Overview = styled.p`
-  font-size: 1.4rem;
-  line-height: 1.8;
-`;
-
-const Backdrop = styled.img`
-  position: absolute;
-  top: 0;
-  left: 0;
+const Image = styled.img`
   width: 100%;
-  height: 450px;
-  background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(145, 152, 229, 0.5)),
-    no-repeat 50% 30% / cover
-      url(${(props: { backdropUrl: string }) => props.backdropUrl});
-  z-index: -1;
-`;
-
-const Section = styled.div`
-  padding: 1rem 2rem;
-`;
-
-const SetionTitle = styled.h3`
-  margin-bottom: 1rem;
-  font-size: 1.5rem;
-  font-weight: 700;
-`;
-
-const Videos = styled.ul`
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1rem;
-`;
-
-const VideoTitle = styled.h4`
-  margin-bottom: 0.5rem;
-  font-size: 1.125rem;
 `;
 
 const IframeContainer = styled.div`
@@ -117,59 +41,53 @@ const IframeContainer = styled.div`
 `;
 
 const DetailsPresenter = ({
-  title,
-  year,
-  runtime,
-  genres,
-  overview,
-  poster_path,
-  backdrop_path,
-  videos,
+  details,
   loading,
   error,
   isMovie,
+  navList,
+  pathname,
 }: Props) => (
   <>
-    {error && <ErrorMessage errorMessage={error} />}
-
+    {error && <ErrorMessage error={error} />}
     {loading ? (
       <Loader />
     ) : (
       <>
-        <Main>
-          <Banner>
-            <Info>
-              <Title>{title}</Title>
-              <Meta>
-                <Data>{year}</Data>
-                <Data>{runtime}min</Data>
-                <Data>
-                  {genres?.map((item) => (
-                    <Genre key={item.id}>{item.name}</Genre>
-                  ))}
-                </Data>
-              </Meta>
-              <Overview>{overview}</Overview>
-            </Info>
-            <Backdrop
-              backdropUrl={
-                backdrop_path
-                  ? `https://image.tmdb.org/t/p/original${backdrop_path}`
-                  : ''
-              }
-            />
-          </Banner>
+        <DetailsInfo details={details}></DetailsInfo>
+        <SectionNav navList={navList} pathname={pathname}></SectionNav>
 
-          <Section>
-            <SetionTitle>Videos</SetionTitle>
-            <Videos>
-              {videos?.map((item) => (
-                <li key={item.id}>
+        <Switch>
+          <Route
+            exact
+            path={isMovie ? `/movie/${details.id}` : `/tv/${details.id}`}
+          >
+            <Section isPoster={false}>
+              {details.images?.map((image, index) => (
+                <li key={index}>
+                  <Image
+                    src={`https://image.tmdb.org/t/p/w300${image.file_path}`}
+                    alt=""
+                  />
+                </li>
+              ))}
+            </Section>
+          </Route>
+          <Route
+            path={
+              isMovie
+                ? `/movie/${details.id}/videos`
+                : `/tv/${details.id}/videos`
+            }
+          >
+            <Section isPoster={false}>
+              {details.videos?.map((video, index) => (
+                <li key={index}>
                   <IframeContainer>
                     <iframe
                       width="1904"
                       height="768"
-                      src={`https://www.youtube.com/embed/${item.key}`}
+                      src={`https://www.youtube.com/embed/${video.key}`}
                       title="YouTube video player"
                       frameBorder="0"
                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -178,9 +96,24 @@ const DetailsPresenter = ({
                   </IframeContainer>
                 </li>
               ))}
-            </Videos>
-          </Section>
-        </Main>
+            </Section>
+          </Route>
+          {!isMovie && (
+            <Route path={`/tv/${details.id}/seasons`}>
+              <Section isPoster={true}>
+                {details.seasons?.map((season) => (
+                  <PosterSeasons
+                    key={season.id}
+                    title={season.name}
+                    imageUrl={season.poster_path}
+                    year={season.air_date?.slice(0, 4)}
+                    episodeCount={season.episode_count}
+                  />
+                ))}
+              </Section>
+            </Route>
+          )}
+        </Switch>
       </>
     )}
   </>
