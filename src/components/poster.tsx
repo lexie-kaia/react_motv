@@ -1,76 +1,86 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import StarRating from './star_rating';
 
 type Props = {
   id: number;
   imageUrl: string;
   title: string;
-  rating: number;
+  score: number;
   year: string;
   isMovie: boolean;
 };
 
-const GridItem = styled.li``;
+const Item = styled.li``;
 
-const Container = styled.div`
-  max-width: 10rem;
+const Content = styled.div`
+  position: relative;
+  overflow: hidden;
+  margin: 0 auto;
+
+  border-radius: 0.5rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2),
+    0 4px 6px -2px rgba(0, 0, 0, 0.1);
 `;
 
-const Image = styled.img`
+const Img = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 1rem;
+  padding-top: 17.5rem;
   width: 100%;
+  height: 24.5rem;
+  background: ${({ url }: { url: string }) =>
+    `linear-gradient(rgba(0,0,0,0) 0%, rgba(44,46,69,0.3) 60%, rgba(23,25,37,1) 75%)
+  , no-repeat 50% 0 / contain url(${url})`};
 `;
 
-const Info = styled.div``;
+const Score = styled.div`
+  display: inline-block;
+  height: 1.8rem;
+  padding: 0 0.6rem;
+  /* margin-bottom: 0.5rem; */
+  border-radius: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.75);
+  background: rgba(255, 255, 255, 0.4);
+  font-size: 0.875rem;
+  font-weight: 700;
+  line-height: 1.8rem;
+  text-align: center;
+`;
 
 const Title = styled.h3`
-  margin-top: 0.75rem;
-  font-weight: 700;
+  margin: 0.6rem 0 0.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.2;
 `;
 
-const Year = styled.span`
-  display: block;
-  margin-top: 0.4rem;
-  color: #757575;
+const Year = styled.div`
+  margin-bottom: 1rem;
   font-size: 0.875rem;
+  color: #bdbdbd;
 `;
 
-const Rating = styled.span`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 0.25rem;
-`;
-
-const RatingScore = styled.div`
-  color: #757575;
-  font-weight: 700;
-`;
-
-const Poster = ({ id, title, imageUrl, year, rating, isMovie }: Props) => (
-  <GridItem>
+const Poster = ({ id, title, imageUrl, year, score, isMovie }: Props) => (
+  <Item>
     <Link to={isMovie ? `/movie/${id}` : `/tv/${id}`}>
-      <Container>
-        <Image
-          src={
+      <Content>
+        <Img
+          url={
             imageUrl
               ? `https://image.tmdb.org/t/p/w500${imageUrl}`
               : '/images/poster_default.jpg'
           }
-          alt=""
-        />
-        <Info>
+        >
+          <Score>{score}</Score>
           <Title>{title}</Title>
           <Year>{year}</Year>
-          <Rating>
-            <StarRating rating={rating} />
-            <RatingScore>{rating}</RatingScore>
-          </Rating>
-        </Info>
-      </Container>
+        </Img>
+      </Content>
     </Link>
-  </GridItem>
+  </Item>
 );
 
 export default Poster;

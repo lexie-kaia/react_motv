@@ -1,78 +1,104 @@
 import React from 'react';
+import { Switch, Route } from 'react-router-dom';
 import { Movie } from './home_container';
-import Main from 'components/main';
-import Section from 'components/section';
 import Loader from 'components/loader';
-import ErrorMessage from 'components/error_message';
+import Error from 'components/error';
+import Banner from 'components/banner';
+import Section from 'components/section';
+import SectionNav from 'components/section_nav';
 import Poster from 'components/poster';
 
 type Props = {
   nowPlaying: Movie[];
   popular: Movie[];
   upcoming: Movie[];
-  isLoading: boolean;
-  errorMessage: string;
+  currMovie: Movie;
+  loading: boolean;
+  error: string;
+  navList: { name: string; pathname: string }[];
+  pathname: string;
 };
 
 const HomePresenter = ({
   nowPlaying,
   popular,
   upcoming,
-  isLoading,
-  errorMessage,
+  currMovie,
+  loading,
+  error,
+  navList,
+  pathname,
 }: Props) => (
   <>
-    {errorMessage && <ErrorMessage errorMessage={errorMessage} />}
-    {isLoading ? (
+    {error && <Error error={error} />}
+    {loading ? (
       <Loader />
     ) : (
-      <Main>
-        {nowPlaying && nowPlaying.length > 0 && (
-          <Section title="Now Playing">
-            {nowPlaying.map((movie) => (
-              <Poster
-                key={movie.id}
-                id={movie.id}
-                title={movie.original_title}
-                imageUrl={movie.poster_path}
-                year={movie.release_date.slice(0, 4)}
-                rating={movie.vote_average}
-                isMovie={true}
-              />
-            ))}
-          </Section>
-        )}
-        {popular && popular.length > 0 && (
-          <Section title="Popular">
-            {popular.map((movie) => (
-              <Poster
-                key={movie.id}
-                id={movie.id}
-                title={movie.original_title}
-                imageUrl={movie.poster_path}
-                year={movie.release_date.slice(0, 4)}
-                rating={movie.vote_average}
-                isMovie={true}
-              />
-            ))}
-          </Section>
-        )}
-        {upcoming && upcoming.length > 0 && (
-          <Section title="Upcoming">
-            {upcoming.map((movie) => (
-              <Poster
-                key={movie.id}
-                id={movie.id}
-                title={movie.original_title}
-                imageUrl={movie.poster_path}
-                year={movie.release_date.slice(0, 4)}
-                rating={movie.vote_average}
-                isMovie={true}
-              />
-            ))}
-          </Section>
-        )}
-      </Main>
+      <>
+        <Banner
+          id={currMovie.id}
+          title={currMovie.original_title}
+          score={currMovie.vote_average}
+          overview={currMovie.overview}
+          backdropUrl={currMovie.backdrop_path}
+        />
+
+        <SectionNav navList={navList} pathname={pathname}></SectionNav>
+
+        <Switch>
+          <Route path="/movies/now_playing">
+            <Section>
+              {nowPlaying &&
+                nowPlaying.length > 0 &&
+                nowPlaying.map((movie) => (
+                  <Poster
+                    key={movie.id}
+                    id={movie.id}
+                    title={movie.original_title}
+                    imageUrl={movie.poster_path}
+                    year={movie.release_date.slice(0, 4)}
+                    score={movie.vote_average}
+                    isMovie={true}
+                  />
+                ))}
+            </Section>
+          </Route>
+          <Route path="/movies/popular">
+            <Section>
+              {popular &&
+                popular.length > 0 &&
+                popular.map((movie) => (
+                  <Poster
+                    key={movie.id}
+                    id={movie.id}
+                    title={movie.original_title}
+                    imageUrl={movie.poster_path}
+                    year={movie.release_date.slice(0, 4)}
+                    score={movie.vote_average}
+                    isMovie={true}
+                  />
+                ))}
+            </Section>
+          </Route>
+          <Route path="/movies/upcoming">
+            <Section>
+              {upcoming &&
+                upcoming.length > 0 &&
+                upcoming.map((movie) => (
+                  <Poster
+                    key={movie.id}
+                    id={movie.id}
+                    title={movie.original_title}
+                    imageUrl={movie.poster_path}
+                    year={movie.release_date.slice(0, 4)}
+                    score={movie.vote_average}
+                    isMovie={true}
+                  />
+                ))}
+            </Section>
+          </Route>
+        </Switch>
+      </>
     )}
   </>
 );
