@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 import { Link } from 'react-router-dom';
 import Star from 'components/star';
 import { BsChevronRight } from 'react-icons/bs';
@@ -10,6 +10,7 @@ type Props = {
   score: number;
   overview: string;
   backdropUrl: string;
+  isMovie: boolean;
 };
 
 const Backdrop = styled.div`
@@ -130,7 +131,26 @@ const ViewButton = styled(Button)`
   }
 `;
 
-const Banner = ({ id, title, score, overview, backdropUrl }: Props) => (
+const Icon = styled.span`
+  display: block;
+  margin-left: 0.5rem;
+  width: 1rem;
+  height: 1rem;
+
+  & svg {
+    width: 100%;
+    height: 100%;
+  }
+`;
+
+const Banner = ({
+  id,
+  title,
+  score,
+  overview,
+  backdropUrl,
+  isMovie,
+}: Props) => (
   <Backdrop backdropUrl={backdropUrl}>
     <Info>
       <Title>{title}</Title>
@@ -145,9 +165,12 @@ const Banner = ({ id, title, score, overview, backdropUrl }: Props) => (
       <Overview>{overview}</Overview>
 
       <Buttons>
-        <Link to={`/movie/${id}`}>
+        <Link to={isMovie ? `/movie/${id}` : `/tv/${id}`}>
           <ViewButton>
-            VIEW MORE <BsChevronRight />
+            VIEW MORE
+            <Icon>
+              <BsChevronRight />
+            </Icon>
           </ViewButton>
         </Link>
       </Buttons>

@@ -41,13 +41,14 @@ const TvPresenter = ({
           score={currTv.vote_average}
           overview={currTv.overview}
           backdropUrl={currTv.backdrop_path}
+          isMovie={false}
         />
 
         <SectionNav navList={navList} pathname={pathname}></SectionNav>
 
         <Switch>
           <Route path="/tvs/airing_today">
-            <Section>
+            <Section isPoster={true}>
               {airingToday &&
                 airingToday.length > 0 &&
                 airingToday.map((tv) => (
@@ -64,7 +65,7 @@ const TvPresenter = ({
             </Section>
           </Route>
           <Route path="/tvs/popular">
-            <Section>
+            <Section isPoster={true}>
               {popular &&
                 popular.length > 0 &&
                 popular.map((tv) => (
@@ -81,7 +82,7 @@ const TvPresenter = ({
             </Section>
           </Route>
           <Route path="/tvs/top_rated">
-            <Section>
+            <Section isPoster={true}>
               {topRated &&
                 topRated.length > 0 &&
                 topRated.map((tv) => (

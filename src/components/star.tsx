@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 import { FaStar, FaStarHalfAlt, FaRegStar } from 'react-icons/fa';
 
 type Props = {

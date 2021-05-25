@@ -33,26 +33,24 @@ const SearchContainer = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string>('');
 
-  const searchByTerm = async (term: string) => {
-    try {
-      setLoading(true);
-      setError('');
-      const movieResults = await movieApi.search(paramTerm);
-      const tvResults = await tvApi.search(paramTerm);
-      setResults({
-        movieResults,
-        tvResults,
-      });
-    } catch (err) {
-      console.error(err);
-      setError("Can't find results");
-    } finally {
-      setLoading(false);
-    }
-  };
-
   useEffect(() => {
-    searchByTerm(paramTerm);
+    (async (term: string) => {
+      try {
+        setLoading(true);
+        setError('');
+        const movieResults = await movieApi.search(paramTerm);
+        const tvResults = await tvApi.search(paramTerm);
+        setResults({
+          movieResults,
+          tvResults,
+        });
+      } catch (err) {
+        console.error(err);
+        setError("Can't find results");
+      } finally {
+        setLoading(false);
+      }
+    })(paramTerm);
   }, [paramTerm]);
 
   return (

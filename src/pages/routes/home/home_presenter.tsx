@@ -41,13 +41,14 @@ const HomePresenter = ({
           score={currMovie.vote_average}
           overview={currMovie.overview}
           backdropUrl={currMovie.backdrop_path}
+          isMovie={true}
         />
 
         <SectionNav navList={navList} pathname={pathname}></SectionNav>
 
         <Switch>
           <Route path="/movies/now_playing">
-            <Section>
+            <Section isPoster={true}>
               {nowPlaying &&
                 nowPlaying.length > 0 &&
                 nowPlaying.map((movie) => (
@@ -64,7 +65,7 @@ const HomePresenter = ({
             </Section>
           </Route>
           <Route path="/movies/popular">
-            <Section>
+            <Section isPoster={true}>
               {popular &&
                 popular.length > 0 &&
                 popular.map((movie) => (
@@ -81,7 +82,7 @@ const HomePresenter = ({
             </Section>
           </Route>
           <Route path="/movies/upcoming">
-            <Section>
+            <Section isPoster={true}>
               {upcoming &&
                 upcoming.length > 0 &&
                 upcoming.map((movie) => (

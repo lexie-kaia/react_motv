@@ -34,7 +34,7 @@ const SearchPresenter = ({
     ) : (
       <>
         {movieResults && movieResults.length > 0 && (
-          <Section title="Movie Results">
+          <Section title="Movie Results" isPoster={true}>
             {movieResults.map((movie) => (
               <Poster
                 key={movie.id}
@@ -49,7 +49,7 @@ const SearchPresenter = ({
           </Section>
         )}
         {tvResults && tvResults.length > 0 && (
-          <Section title="Tv Results">
+          <Section title="Tv Results" isPoster={true}>
             {tvResults.map((tv) => (
               <Poster
                 key={tv.id}

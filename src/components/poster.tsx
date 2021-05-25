@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 
 type Props = {
   id: number;
@@ -14,10 +14,10 @@ type Props = {
 const Item = styled.li``;
 
 const Content = styled.div`
+  max-width: 14rem;
   position: relative;
   overflow: hidden;
   margin: 0 auto;
-
   border-radius: 0.5rem;
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2),
     0 4px 6px -2px rgba(0, 0, 0, 0.1);
@@ -26,13 +26,13 @@ const Content = styled.div`
 const Img = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: flex-end;
   align-items: flex-start;
-  padding: 1rem;
-  padding-top: 17.5rem;
+  padding: 1.5rem 1rem;
   width: 100%;
-  height: 24.5rem;
+  height: 24rem;
   background: ${({ url }: { url: string }) =>
-    `linear-gradient(rgba(0,0,0,0) 0%, rgba(44,46,69,0.3) 60%, rgba(23,25,37,1) 75%)
+    `linear-gradient(rgba(0,0,0,0) 0%, rgba(44,46,69,0.3) 50%, rgba(23,25,37,1) 80%)
   , no-repeat 50% 0 / contain url(${url})`};
 `;
 
@@ -58,7 +58,6 @@ const Title = styled.h3`
 `;
 
 const Year = styled.div`
-  margin-bottom: 1rem;
   font-size: 0.875rem;
   color: #bdbdbd;
 `;

@@ -1,42 +1,31 @@
 import React from 'react';
-import styled from 'styled-components';
-import { Link } from 'react-router-dom';
-import Star from 'components/star';
+import styled from '@emotion/styled';
+import { Details } from 'pages/routes/details/details_container';
 import { BsChevronRight } from 'react-icons/bs';
-
-export type Details = {
-  id: number;
-  original_title: string;
-  vote_average: number;
-  release_date: string;
-  runtime: number;
-  genres: { id: number; name: string }[];
-  production_companies: { id: number; logo_path: string; name: string }[];
-  production_countries: { iso_3166_1: string; name: string }[];
-  overview: string;
-  imdb_id: string;
-  poster_path: string;
-  backdrop_path: string;
-  videos?: {
-    results: { id: string; key: string; name: string }[];
-  };
-};
+import Star from 'components/star';
 
 type Props = {
-  currMovie: Details;
+  details: Details;
 };
 
-const Container = styled.div`
-  flex-shrink: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 14rem;
+const Backdrop = styled.div`
+  min-height: 36rem;
+  padding: 3rem 2rem;
 
   @media screen and (min-width: 769px) {
-    margin-top: 10rem;
-    flex-direction: row;
+    min-height: 40rem;
+    padding: 4rem 2rem;
   }
+
+  @media screen and (min-width: 1200px) {
+    padding: 4rem 6rem;
+  }
+  background: ${({ backdropUrl }: { backdropUrl: string }) =>
+    backdropUrl
+      ? `linear-gradient(rgba(3, 3, 3, 0.9), rgba(44,46,69,0.5)),
+    no-repeat 50% 30% / cover
+      url(https://image.tmdb.org/t/p/original${backdropUrl})`
+      : '#212121'};
 `;
 
 const Info = styled.div`
@@ -175,9 +164,7 @@ const Button = styled.div`
   }
 `;
 
-const ImdbButton = styled(Button)``;
-
-const ViewButton = styled(Button)`
+const ImdbButton = styled(Button)`
   padding: 1px 1rem 0 1.2rem;
   background: rgba(255, 255, 255, 0.2);
 
@@ -186,36 +173,41 @@ const ViewButton = styled(Button)`
   }
 `;
 
-const CurrMovie = ({ currMovie }: Props) => (
-  <Container>
+const Icon = styled.span`
+  display: block;
+  margin-left: 0.5rem;
+`;
+
+const DetailsInfo = ({ details }: Props) => (
+  <Backdrop backdropUrl={details.backdropUrl}>
     <Info>
-      <Title>{currMovie.original_title}</Title>
+      <Title>{details.title}</Title>
 
       <Meta>
-        <Data>{currMovie.release_date.slice(0, 4)}</Data>
-        <Data>{currMovie.runtime}min</Data>
+        <Data>{details.year}</Data>
+        <Data>{details.runtime}min</Data>
         <Data>
-          {currMovie.production_countries.map((item) => (
+          {details.countries.map((item) => (
             <Span key={item.iso_3166_1}>{item.iso_3166_1}</Span>
           ))}
         </Data>
       </Meta>
       <Meta>
         <Data>
-          {currMovie.genres.map((item) => (
+          {details.genres.map((item) => (
             <Span key={item.id}>{item.name}</Span>
           ))}
         </Data>
       </Meta>
 
       <Score>
-        <Average>{currMovie.vote_average} / 10</Average>
-        <Star score={currMovie.vote_average} />
+        <Average>{details.score} / 10</Average>
+        <Star score={details.score} />
       </Score>
 
       <Meta>
         <Production>
-          {currMovie.production_companies.map((item) => (
+          {details.companies.map((item) => (
             <Company key={item.id}>{item.name}</Company>
           ))}
         </Production>
@@ -223,20 +215,23 @@ const CurrMovie = ({ currMovie }: Props) => (
 
       <Hr />
 
-      <Overview>{currMovie.overview}</Overview>
+      <Overview>{details.overview}</Overview>
 
       <Buttons>
-        <Anchor href="/">
-          <ImdbButton>IMDB</ImdbButton>
+        <Anchor
+          href={`https://www.imdb.com/title/${details.imdb}`}
+          target="_blank"
+        >
+          <ImdbButton>
+            IMDB{' '}
+            <Icon>
+              <BsChevronRight />
+            </Icon>
+          </ImdbButton>
         </Anchor>
-        <Link to="/">
-          <ViewButton>
-            VIEW MORE <BsChevronRight />
-          </ViewButton>
-        </Link>
       </Buttons>
     </Info>
-  </Container>
+  </Backdrop>
 );
 
-export default CurrMovie;
+export default DetailsInfo;
