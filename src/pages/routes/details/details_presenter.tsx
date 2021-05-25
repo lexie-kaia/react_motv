@@ -1,5 +1,6 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 import { Details, NavList } from './details_container';
 import styled from '@emotion/styled';
 import Loader from 'components/loader';
@@ -51,6 +52,9 @@ const DetailsPresenter = ({
   pathname,
 }: Props) => (
   <>
+    <Helmet>
+      <title>{`${details.title} | MOTV`}</title>
+    </Helmet>
     {error && <ErrorMessage error={error} />}
     {loading ? (
       <Loader />

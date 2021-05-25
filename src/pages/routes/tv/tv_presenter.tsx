@@ -1,5 +1,6 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 import { Tv } from './tv_container';
 import Loader from 'components/loader';
 import Error from 'components/error';
@@ -30,6 +31,9 @@ const TvPresenter = ({
   pathname,
 }: Props) => (
   <>
+    <Helmet>
+      <title>TV Shows | MOTV</title>
+    </Helmet>
     {error && <Error error={error} />}
     {loading ? (
       <Loader />

@@ -97,8 +97,6 @@ const DetailContainer = () => {
           images: response.images?.backdrops,
           seasons: response.seasons,
         });
-        console.log(details.imdb);
-        console.log(response.imdb_id);
       } catch (err) {
         console.error(err);
         setError("Can't find anything");

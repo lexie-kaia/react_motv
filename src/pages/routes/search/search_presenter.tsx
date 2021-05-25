@@ -1,4 +1,5 @@
 import React from 'react';
+import { Helmet } from 'react-helmet';
 import { Movie, Tv } from './search_container';
 import Section from 'components/section';
 import Loader from 'components/loader';
@@ -21,6 +22,9 @@ const SearchPresenter = ({
   error,
 }: Props) => (
   <>
+    <Helmet>
+      <title>Search | MOTV</title>
+    </Helmet>
     {error && <Error error={error} />}
     {!loading &&
       movieResults &&
