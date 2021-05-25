@@ -25,41 +25,43 @@ export type Results = {
 };
 
 const SearchContainer = () => {
-  const { term: searchTerm } = useParams<{ term: string }>();
+  const { term: paramTerm } = useParams<{ term: string }>();
   const [results, setResults] = useState<Results>({
     movieResults: [],
     tvResults: [],
   });
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [errorMessage, setErrorMessage] = useState<string>('');
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string>('');
 
   const searchByTerm = async (term: string) => {
     try {
-      const movieResults = await movieApi.search(searchTerm);
-      const tvResults = await tvApi.search(searchTerm);
+      setLoading(true);
+      setError('');
+      const movieResults = await movieApi.search(paramTerm);
+      const tvResults = await tvApi.search(paramTerm);
       setResults({
         movieResults,
         tvResults,
       });
-    } catch (error) {
-      console.error(error);
-      setErrorMessage("Can't find results");
+    } catch (err) {
+      console.error(err);
+      setError("Can't find results");
     } finally {
-      setIsLoading(false);
+      setLoading(false);
     }
   };
 
   useEffect(() => {
-    searchByTerm(searchTerm);
-  }, [searchTerm]);
+    searchByTerm(paramTerm);
+  }, [paramTerm]);
 
   return (
     <SearchPresenter
       movieResults={results.movieResults}
       tvResults={results.tvResults}
-      searchTerm={searchTerm}
-      isLoading={isLoading}
-      errorMessage={errorMessage}
+      searchTerm={paramTerm}
+      loading={loading}
+      error={error}
     />
   );
 };
