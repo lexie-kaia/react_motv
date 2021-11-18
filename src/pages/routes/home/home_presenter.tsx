@@ -55,13 +55,13 @@ const HomePresenter = ({
             <Section isPoster={true}>
               {nowPlaying &&
                 nowPlaying.length > 0 &&
-                nowPlaying.map((movie) => (
+                nowPlaying.map(movie => (
                   <Poster
                     key={movie.id}
                     id={movie.id}
                     title={movie.original_title}
                     imageUrl={movie.poster_path}
-                    year={movie.release_date.slice(0, 4)}
+                    year={movie.release_date?.slice(0, 4)}
                     score={movie.vote_average}
                     isMovie={true}
                   />
@@ -72,13 +72,13 @@ const HomePresenter = ({
             <Section isPoster={true}>
               {popular &&
                 popular.length > 0 &&
-                popular.map((movie) => (
+                popular.map(movie => (
                   <Poster
                     key={movie.id}
                     id={movie.id}
                     title={movie.original_title}
                     imageUrl={movie.poster_path}
-                    year={movie.release_date.slice(0, 4)}
+                    year={movie.release_date?.slice(0, 4)}
                     score={movie.vote_average}
                     isMovie={true}
                   />
@@ -89,13 +89,13 @@ const HomePresenter = ({
             <Section isPoster={true}>
               {upcoming &&
                 upcoming.length > 0 &&
-                upcoming.map((movie) => (
+                upcoming.map(movie => (
                   <Poster
                     key={movie.id}
                     id={movie.id}
                     title={movie.original_title}
                     imageUrl={movie.poster_path}
-                    year={movie.release_date.slice(0, 4)}
+                    year={movie.release_date?.slice(0, 4)}
                     score={movie.vote_average}
                     isMovie={true}
                   />
