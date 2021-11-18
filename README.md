@@ -1,44 +1,61 @@
-# Mov
+# MOTV
 
-A basic movie application with React and TMDB API
+### 개요
 
-[img]
+React와 IMDB API를 활용한 영화,TV 프로그램 앱
 
-![REACT](https://img.shields.io/badge/-REACT-02b3e4?style=flat-square&logo=react&logoColor=white)
-![TYPESCRIPT](https://img.shields.io/badge/-TYPESCRIPT-3178c6?style=flat-square&logo=typescript&logoColor=white)
+### 목표
 
-## Tasks
+React의 활용한 기본적인 SPA 구현 및 반응형 UI 디자인
 
-1. React Router
+<br/>
 
-- [x] install react-router-dom, @type/react-router-dom  
-       `$yarn add react-router-dom @type/react-router-dom`
-- [x] set up routing - Router, Switch, Link - Header components
+[>View Live](https://confident-clarke-58063e.netlify.app/)
 
-2. Styled Components
+<br/>
+<br/>
 
-- [x] install styled-components, @types/styled-components, styled-reset
-      `$yarn add styled-components @types/styled-components styled-reset`
-- [x] create global styles + reset styles
+### HOME - MOVIE / TV SHOWS - NOW PLAYTING / POPULAR / UPCOMING
 
-3. TMDB API
+![1](./demos/1.jpg)
 
-- [x] get api key
-- [x] create tmdb api class
-  - Movie(nowPlaying, popular, upcoming, detail, search)
-  - Tv(airingToday, popular, topRated, detail, search)
+<br/>
 
-4. Container-Presenter Pattern
+### DETAILS - IMAGES / VIDEOS
 
-- [x] create container-presenter pattern
-  - [Dan Abramov - Presentational and Conatiner Components](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0)
-  - index.js
-    : access point -> managing module dependencies
-  - container.tsx
-    : how things work -> providing the data and behavior to presenter
-  - presenter.tsx
-    : how things look
-- [x] Home(movie)
-- [x] TV
-- [x] Search
-- [x] Detail
+![7](./demos/7.jpg)
+
+<br/>
+
+### SEARCH
+
+![8](./demos/8.jpg)
+
+<br/>
+
+### HOME(MOBILE)
+
+![5](./demos/5.jpg)
+
+<br/>
+
+### DETAILS(MOBILE)
+
+![4](./demos/4.jpg)
+
+<br/>
+
+### SEARCH(MOBILE)
+
+![6](./demos/6.jpg)
+
+<br/>
+<br/>
+
+### 참고
+
+**Container-Presenter Pattern**
+
+- Medium Dan Abramov - [Presentational and Conatiner Components](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0)
+
+<br/>
